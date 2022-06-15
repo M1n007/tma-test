@@ -54,6 +54,8 @@ def ocr():
     page = args.get('page')
     
     result,code = getAllNews(search, size, page)
-    return jsonify(result),code
+    resultData = jsonify(result)
+    resultData.headers.add('Access-Control-Allow-Origin', '*')
+    return resultData,code
 
 app.run(host='0.0.0.0', port=int(PORT))

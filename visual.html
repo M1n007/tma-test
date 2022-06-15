@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Line Chart</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.chartjs.org/dist/2.6.0/Chart.bundle.js"></script>
+    <script src="https://www.chartjs.org/samples/2.6.0/utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:75%;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <br>
+    <br>
+    <script>
+
+        var rootHost = 'http://localhost:3000'
+        var p = [];
+
+
+        async function main() {
+            const label = ["January", "February", "March", "April", "May", "June", "July"];
+
+            label.map(data => {
+                p.push($.ajax({ url: rootHost + `/api/news?search=${data.toLowerCase()}`, method: 'GET' }));
+            })
+
+            Promise.all(p).then(values => {
+                console.log(values[3].metaData.totalData);
+
+                var config = {
+                    type: 'line',
+                    data: {
+                        labels: label,
+                        datasets: [{
+                            label: "My First dataset",
+                            backgroundColor: window.chartColors.red,
+                            borderColor: window.chartColors.red,
+                            data: [
+                                values[0].metaData.totalData,
+                                values[1].metaData.totalData,
+                                values[2].metaData.totalData,
+                                values[3].metaData.totalData,
+                                values[4].metaData.totalData,
+                                values[5].metaData.totalData,
+                                values[6].metaData.totalData
+                            ],
+                            fill: false,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Chart.js Line Chart'
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Month'
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Value'
+                                }
+                            }]
+                        }
+                    }
+                };
+
+                
+
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myLine = new Chart(ctx, config);
+            });
+
+
+
+        }
+
+
+
+        main()
+
+
+
+
+
+    </script>
+</body>
+
+</html>
