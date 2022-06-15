@@ -1,6 +1,22 @@
 # TMA-Test
 
 
+# Configuration Details
+
+ELASTICSEARCH HOST = https://es.arenadev.space/
+KIBANA HOST = https://kibana.arenadev.space/
+Kibana user = tmatest
+Kibana pass = tmatest2022
+
+# API News Details
+
+ENDPOINT API NEWS : /api/news
+PARAMS :
+    - size (page size)
+    - page (page number)
+    - search ( for search filed konten and judul )
+
+
 # Modules!
 
   - flask
