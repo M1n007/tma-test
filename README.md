@@ -3,9 +3,9 @@
 
 # Configuration Details
 
-ELASTICSEARCH HOST = https://es.arenadev.space/\
-KIBANA HOST = https://kibana.arenadev.space/\
-Kibana user = tmatest\
+ELASTICSEARCH HOST = https://es.arenadev.space/ \
+KIBANA HOST = https://kibana.arenadev.space/ \
+Kibana user = tmatest \
 Kibana pass = tmatest2022
 
 # API News Details
