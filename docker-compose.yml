@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ocr-python:
+  tma-test:
     build: .
     ports:
       - "3000:3000"
